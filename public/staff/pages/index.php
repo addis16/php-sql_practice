@@ -1,12 +1,9 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
 <?php
-$pages = [
-    ['id' => '1', 'position' => '1', 'visible' => '1', 'menu_name' => 'About Globe Bank'],
-    ['id' => '2', 'position' => '2', 'visible' => '1', 'menu_name' => 'Consumer'],
-    ['id' => '3', 'position' => '3', 'visible' => '1', 'menu_name' => 'Small Business'],
-    ['id' => '4', 'position' => '4', 'visible' => '1', 'menu_name' => 'Commercial'],
-  ];
+
+$pages_set = find_all_pages();
+
 ?>
 
 <?php $page_title = "Pages"; ?>
@@ -23,6 +20,7 @@ $pages = [
         <table class="list">
             <tr>
                 <th>ID</th>
+                <th>Subject ID</th>
                 <th>Position</th>
                 <th>Visible</th>
                 <th>Name</th>
@@ -31,9 +29,10 @@ $pages = [
                 <th>&nbsp;</th>  
             </tr>
 
-          <?php foreach($pages as $page) { ?>
+          <?php while($page = mysqli_fetch_assoc($pages_set)) { ?>
             <tr>
                 <td> <?php echo htmlspecialchars($page['id']); ?> </td>
+                <td> <?php echo htmlspecialchars($page['subject_id']); ?> </td>
                 <td> <?php echo htmlspecialchars($page['position']) ?> </td>
                 <td> <?php echo htmlspecialchars($page['visible'] == 1) ? 'true' : 'false'; ?> </td>
                 <td> <?php echo htmlspecialchars($page['menu_name']) ?> </td>
@@ -43,6 +42,9 @@ $pages = [
             </tr>
           <?php } ?>
         </table>
+
+        <?php mysqli_free_result($pages_set); ?>
+
     </div>
     
 </div>
