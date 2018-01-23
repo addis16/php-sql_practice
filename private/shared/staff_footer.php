@@ -7,3 +7,7 @@ date_default_timezone_set('US/Eastern');
       </footer>
   </body>
 </html>
+
+<?php
+    db_disconnect($db);
+?>
