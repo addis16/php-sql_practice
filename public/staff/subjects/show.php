@@ -4,13 +4,7 @@
 
 $id = isset($_GET['id']) ? $_GET['id'] : '1';
 
-$sql = "SELECT * FROM subjects ";
-$sql .= "WHERE id='" . $id . "'";
-$result = mysqli_query($db, $sql);
-confirm_result_set($result);
-
-$subject = mysqli_fetch_assoc($result);
-mysqli_free_result($result);
+$subject = find_subject_by_id($id);
 
 ?>
 
@@ -21,7 +15,7 @@ mysqli_free_result($result);
     <a class="back-link" href="<?php echo url_for('/staff/subjects/index.php'); ?>">&laquo; Back to Subjects List</a>
     <div class="subject show">
 
-        <h1> Subject ID: <?php echo htmlspecialchars(subject['menu_name']); ?> </h1>
+        <h1> Subject: <?php echo htmlspecialchars($subject['menu_name']); ?> </h1>
 
         <div class="attributes">
             <dl>
@@ -33,7 +27,7 @@ mysqli_free_result($result);
                 <dd> <?php echo htmlspecialchars($subject['position']); ?> </dd>
             </dl>
             <dl>
-                <dt>Menu Name</dt>
+                <dt>Visible</dt>
                 <dd> <?php echo $subject['visible'] == '1' ? 'true' : 'false'; ?> </dd>
             </dl>
         </div>

@@ -23,7 +23,7 @@ require_once('../../../private/initialize.php');
         <dt>Position</dt>
         <dd>
           <select name="position">
-            <option value="">1</option>
+            <option value="1"></option>
           </select>
         </dd>
       </dl>

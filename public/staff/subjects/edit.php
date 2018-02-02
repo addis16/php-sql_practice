@@ -5,9 +5,6 @@ if(!isset($_GET['id'])) {
     redirect_to(url_for('/staff/subjects/index.php'));
 }
 $id = $_GET['id'];
-$menu_name = '';
-$position = '';
-$visible = '';
 
 if(is_post_request()) {
     
@@ -22,6 +19,10 @@ if(is_post_request()) {
     echo "Position: " . $position . "<br/>";
     echo "Visible: " . $visible . "<br/>";
     
+} else {
+
+    $subject = find_subject_by_id($id);
+
 }
 
 ?>
@@ -39,13 +40,13 @@ if(is_post_request()) {
     <form action="<?php echo url_for('/staff/subjects/edit.php?id=' . htmlspecialchars($id)); ?>" method="post">
       <dl>
         <dt>Menu Name</dt>
-        <dd><input type="text" name="menu_name" value="<?php echo $menu_name ?>" /></dd>
+        <dd><input type="text" name="menu_name" value="<?php echo htmlspecialchars($subject['menu_name']); ?>" /></dd>
       </dl>
       <dl>
         <dt>Position</dt>
         <dd>
           <select name="position">
-            <option value="1" <?php if($position == 1) { echo " selected"; } ?> >1</option>
+            <option value="1" <?php if($subject['position'] == "1") { echo " selected"; } ?> >1</option>
           </select>
         </dd>
       </dl>
@@ -53,7 +54,7 @@ if(is_post_request()) {
         <dt>Visible</dt>
         <dd>
           <input type="hidden" name="visible" value="0" />
-          <input type="checkbox" name="visible" value="1" <?php if($visible == "1") { echo " checked"; }  ?> />
+          <input type="checkbox" name="visible" value="1" <?php if($subject['visible'] == "1") { echo " checked"; }  ?> />
         </dd>
       </dl>
       <div id="operations">

@@ -31,5 +31,7 @@ if(is_post_request()) {
         exit;
     }
 
+} else {
+    redirect_to(url_for('/staff/subjects/new.php'));
 }
 ?>
